@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { FileUpload } from '@/components/FileUpload';
-import { DataView } from '@/components/DataView';
-import { ChatInterface } from '@/components/ChatInterface';
-import { AnalysisResultView } from '@/components/AnalysisResultView';
+import { FileUpload } from './components/FileUpload';
+import { DataView } from './components/DataView';
+import { ChatInterface } from './components/ChatInterface';
+import { AnalysisResultView } from './components/AnalysisResultView';
 import { LayoutDashboard, FileSpreadsheet, Trash2, Moon, Sun, Link as LinkIcon, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import * as XLSX from 'xlsx';
@@ -180,16 +180,20 @@ export default function App() {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 p-4 lg:p-6 overflow-y-auto lg:overflow-hidden bg-slate-50 dark:bg-slate-950">
-        <div className="h-full max-w-[1600px] mx-auto flex flex-col lg:grid lg:grid-cols-12 gap-6">
+      <main className="flex-1 p-4 lg:p-6 overflow-hidden bg-slate-50 dark:bg-slate-950">
+        <div className="h-full max-w-[1600px] mx-auto flex flex-col lg:grid lg:grid-cols-12 gap-6 min-h-0">
           
           {/* Chat Column */}
-          <div className="lg:col-span-3 flex flex-col h-[450px] lg:h-full shrink-0">
-            <ChatInterface 
-              sheets={sheets} 
-              className="flex-1 shadow-sm border-slate-200/60 dark:border-slate-800/60"
-              onResultUpdate={handleResultUpdate}
-            />
+          <div className="lg:col-span-3 flex flex-col h-[450px] lg:h-full shrink-0 min-h-0">
+            {sheets.length >= 0 ? (
+              <ChatInterface 
+                sheets={sheets} 
+                className="flex-1 shadow-sm border-slate-200/60 dark:border-slate-800/60"
+                onResultUpdate={handleResultUpdate}
+              />
+            ) : (
+              <div className="p-4 text-red-500">Erreur de chargement du chat</div>
+            )}
           </div>
 
           {/* Data & Results Column */}

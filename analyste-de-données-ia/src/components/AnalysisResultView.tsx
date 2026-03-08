@@ -22,7 +22,7 @@ import {
 } from 'recharts';
 import { DataView } from './DataView';
 import { FileSpreadsheet, BarChart2, AlignLeft, PieChart as PieIcon, TrendingUp, Activity, Loader2 } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { cn } from '../lib/utils';
 
 interface ChartData {
   type: 'bar' | 'line' | 'pie' | 'area';
