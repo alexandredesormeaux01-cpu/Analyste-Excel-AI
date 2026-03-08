@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/proxy-fetch",
+      "destination": "/api/proxy-fetch"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

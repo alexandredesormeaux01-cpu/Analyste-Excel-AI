@@ -351,7 +351,13 @@ export function ChatInterface({ sheets, className, onResultUpdate }: ChatInterfa
 
     } catch (error: any) {
       console.error("Error calling Gemini:", error);
-      setMessages(prev => [...prev, { role: 'model', content: `Désolé, une erreur est survenue lors de l'analyse : ${error.message || error}` }]);
+      let errorMessage = error.message || error;
+      
+      if (errorMessage.includes("503") || errorMessage.includes("UNAVAILABLE")) {
+        errorMessage = "Le service Gemini est actuellement saturé. Veuillez patienter une minute et réessayer. (Erreur 503: Service Unavailable)";
+      }
+      
+      setMessages(prev => [...prev, { role: 'model', content: `Désolé, une erreur est survenue lors de l'analyse : ${errorMessage}` }]);
     } finally {
       setIsLoading(false);
     }
